@@ -1,1 +1,13 @@
-# Al-duyniya1
+# Al-Dunia
+
+## To Install Dependencies
+
+```
+npm install
+```
+
+## To Run Project
+
+```
+npm start
+```

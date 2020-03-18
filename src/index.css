@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Noto Sans';
+}
+
+.avatar-img {
+	height: 40px;
+	width: 40px;
+}
+
+img {
+	height: 100%;
+	width: 100%;
+}
+
+.img-circle {
+	border-radius: 50%;
+}
+
+.custom-active {
+	color: #014c95 !important;
+	display: block;
+	padding: 0.5rem 1rem;
+}
+
+a {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.client-image {
+	height: 150px;
+	width: 150px;
+}
+.client-image:hover {
+	opacity: 1;
+}
+.filter {
+	filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));
+	transition: filter 0.25s ease-in-out;
+	opacity: 0.9;
+}
+
+.appointment-circle {
+	min-width: 100px;
+	max-width: 100px;
+	max-height: 100px;
+	min-height: 100px;
+}
+.background-grey {
+	background: #b3b3b3;
+}
+.background-active {
+	background: #004368 !important;
+}
+
+.border-radius-custom {
+	border-radius: 10px;
+	box-shadow: 20px 20px 60px #d1d1d1, -20px -20px 60px #ffffff;
+}
+.border-active {
+	border: 1px solid #004368;
+}
+.plus-circle {
+	min-width: 150px;
+	min-height: 150px;
+}
+.font-36px {
+	font-size: calc(30px + 2vmin);
+}
+.border-bottom-custom {
+	border-bottom: 1px solid #004368 !important;
+}
+.btn-custom {
+	background: #004368 !important;
+	color: white !important;
+	min-width: 150px !important;
+	border-radius: 23px !important;
+}
+
+.border-grey-5 {
+	border: 5px solid #b3b3b3 !important;
+}
+.w-68 {
+	width: 68% !important;
+}
+.max-height-40vh {
+	max-height: 40vh;
+}
+.h-100vh {
+	height: 100vh;
+}
+.flex-2 {
+	flex: 2;
+}
+.flex-1 {
+	flex: 1;
+}
+.login-logo {
+	height: 15rem;
+	width: 15rem;
+}
+.w-45vw {
+	width: 45vw;
+}
+.custom-media-select {
+	border-radius: 10px;
+	opacity: 0.9;
+}
+.text-custom-blue {
+	color: #004368;
+}
+.logout {
+	border-radius: 4px;
+	opacity: 0.8;
+	width: 100px;
+	height: 100px;
+	display: none;
+}
+.avatar-img:hover .logout {
+	display: block;
+}
+.triangle-4 {
+	width: 60px;
+	height: 30px;
+	border-bottom: solid 30px rgb(200, 30, 50);
+	border-left: solid 30px transparent;
+	border-right: solid 30px transparent;
+}
+
+@media only screen and (max-width: 767px) {
+	.flex-wrap-xs {
+		flex-wrap: wrap;
+	}
+
+	.client-image {
+		width: 100px;
+		height: 100px;
+	}
+	.plus-circle {
+		min-width: 100px;
+		min-height: 100px;
+		height: 112px;
+		width: 112px;
+	}
+}
