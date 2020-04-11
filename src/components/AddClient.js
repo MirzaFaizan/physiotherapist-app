@@ -99,8 +99,8 @@ export default function AddCLient() {
 						{file ? (
 							<img src={file} alt="" className="img-circle" />
 						) : (
-							<i className="fas fa-plus text-grey font-36px text-light" />
-						)}
+								<i className="fas fa-plus text-grey font-36px text-light" />
+							)}
 					</div>
 					<div>
 						<h4 className="py-2">Add Media</h4>
@@ -193,7 +193,7 @@ export default function AddCLient() {
 					</div>
 
 					<div className="d-flex flex-column py-3">
-						Problem Discription
+						Problem Description
 						<div className="border-active mt-2 w-75 h-100">
 							<textarea
 								className="w-100 h-100 p-0 border-0"

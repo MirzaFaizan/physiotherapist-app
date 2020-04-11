@@ -53,9 +53,10 @@ export default function AddAppointment({ selectedClientId, setNewAppointmentData
 							Format(HH:MM) Time
 							<div className="ml-3 w-100 border-bottom-custom">
 								<input
-									type="text"
+									type="time"
 									className="border-0 w-100"
 									name="time"
+
 									ref={register({ required: true })}
 								/>
 							</div>
@@ -66,8 +67,8 @@ export default function AddAppointment({ selectedClientId, setNewAppointmentData
 				<div className="col-sm-6 mx-auto">
 					<div className=" p-3">
 						Notes
-						<div className="ml-3 w-100 border-bottom-custom">
-							<textarea type="text" className="border-0 w-100 text-left" name="notes" ref={register} />
+						<div className="ml-3 w-100">
+							<textarea type="text" className="w-100 text-left" name="notes" ref={register} />
 						</div>
 						{errors.notes && <span className="font-weight-bold text-danger">*</span>}
 					</div>

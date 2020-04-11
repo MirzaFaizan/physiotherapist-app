@@ -10,9 +10,9 @@ export const UserInfo = ({ selectedClientId }) => {
 			setSelectedClient(clientInfo.data);
 		});
 	}, [selectedClientId]);
-	console.log('selectedClient');
-	console.log(selectedClient);
+
 	let { passcode, name, lastname, age, weight, height, contactmethod, phoneNumber, problem } = selectedClient;
+
 	return (
 		<div className="row px-4 py-5">
 			<div className="col-md-6 py-2">
@@ -37,9 +37,7 @@ export const UserInfo = ({ selectedClientId }) => {
 						<span className="text-muted">Preferred Contact Method:-{phoneNumber}</span>
 					</div>
 					<div className="col-md-6 py-2">
-						<select className="custom-select">
-							<option value={contactmethod}>{contactmethod}</option>
-						</select>
+						<span className="text-muted">{contactmethod}</span>
 					</div>
 				</div>
 			</div>

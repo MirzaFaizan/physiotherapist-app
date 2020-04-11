@@ -33,11 +33,14 @@ export const AssignExercise = ({ title, row = false, modelId = '', selectedClien
 			<h3 className="custom-active font-weight-bold mb-0 pl-0">{title}</h3>
 			<div className={`col-md-12 d-flex overflow-auto p-0  ${row ? `flex-row` : `flex-wrap`}`}>
 				{getAllAssignExercise.map((result, index) => (
-					<div
-						className="appointment-circle background-grey shadow border img-circle d-flex justify-content-center align-items-center m-2 background-active "
-						key={index}
-					>
-						<span className="p-3 text-center text-light">{result.exercise}</span>
+					<div className="text-center">
+						<div
+							className="appointment-circle background-grey shadow border img-circle d-flex justify-content-center align-items-center m-2 background-active "
+							key={index}
+						>
+							<span className="p-3 text-center text-light">{result.exercise}</span>
+						</div>
+						<button className="btn btn-danger btn-sm">Delete</button>
 					</div>
 				))}
 

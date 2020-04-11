@@ -36,7 +36,7 @@ const Clients = ({ handleClick, title, selectedClientId }) => {
 			<div className={`col-md-12 d-flex overflow-auto p-0  `}>
 				{clientData.map(client =>
 					client.file ? (
-						<div>
+						<div className="text-center">
 							<div className="col-sm-3" key={client._id}>
 								<img
 									style={selectedClientId === client._id ? { border: '3px solid red' } : {}}
@@ -45,13 +45,13 @@ const Clients = ({ handleClick, title, selectedClientId }) => {
 									onClick={() => handleClick(client._id)}
 								/>
 							</div>
-							<button className="btn btn-primary ml-5 mt-2" onClick={() => deleteClient(client._id)}>
+							<button className="btn btn-danger btn-sm mt-2" onClick={() => deleteClient(client._id)}>
 								Delete
 							</button>
 						</div>
 					) : (
-						''
-					)
+							''
+						)
 				)}
 
 				<div

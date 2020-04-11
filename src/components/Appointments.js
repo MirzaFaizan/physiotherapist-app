@@ -33,7 +33,7 @@ export const Appointments = ({ title, row = false, modelId = '', selectedClientI
 		});
 	}, [selectedClientId]);
 	console.log('getAllAppointement');
-	console.log(selectedClientId);
+	// console.log(selectedClientId);
 	const setNewAppointmentData = response => {
 		setAllAppointement([...getAllAppointement, response.Appointment]);
 		handleClose();
@@ -50,16 +50,20 @@ export const Appointments = ({ title, row = false, modelId = '', selectedClientI
 			<h3 className="custom-active font-weight-bold mb-0 pl-0">{title}</h3>
 			<div className={`col-md-12 d-flex overflow-auto p-0  ${row ? `flex-row` : `flex-wrap`}`}>
 				{getAllAppointement.map(appoint => (
-					<div
-						className="appointment-circle background-grey shadow border img-circle d-flex justify-content-center align-items-center m-2 background-active "
-						key={appoint._id}
-						onClick={() => openModelAppointement(appoint._id)}
-					>
-						<span className="p-3 text-center text-light">
-							{`${new Date(appoint.date).getDate()}/${new Date(appoint.date).getMonth() + 1}/${new Date(
-								appoint.date
-							).getFullYear()}`}
-						</span>
+					<div className="text-center">
+						<div
+							className="appointment-circle background-grey shadow border img-circle d-flex justify-content-center align-items-center m-2 background-active "
+							key={appoint._id}
+							onClick={() => openModelAppointement(appoint._id)}
+						>
+							<span className="p-3 text-center text-light">
+								{`${new Date(appoint.date).getDate()}/${new Date(appoint.date).getMonth() + 1}/${new Date(
+									appoint.date
+								).getFullYear()}`}
+							</span>
+						</div>
+
+						<input type="button" className="btn btn-danger btn-sm" value="delete" />
 					</div>
 				))}
 
