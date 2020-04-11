@@ -5,15 +5,26 @@ import Model from './Model';
 import api from '../apiCalls/api';
 
 import AddAppointment from './AddAppointment';
+import GetAppointment from './GetAppointment';
 
 export const Appointments = ({ title, row = false, modelId = '', selectedClientId }) => {
 	const [getAllAppointement, setAllAppointement] = useState([]);
+	const [selectedApointId, setSelectedApointId] = useState('');
 	const [show, setShowModal] = useState(false);
+	const [showModel, setShowModalAppointment] = useState(false);
 	const handleClose = () => {
 		setShowModal(false);
 	};
 	const openModal = () => {
 		setShowModal(true);
+	};
+	const openModelAppointement = appointId => {
+		setShowModalAppointment(true);
+		setSelectedApointId(appointId);
+	};
+	const handleCloseAppointement = () => {
+		setShowModalAppointment(false);
+		setSelectedApointId('');
 	};
 
 	useEffect(() => {
@@ -33,12 +44,16 @@ export const Appointments = ({ title, row = false, modelId = '', selectedClientI
 			<Model show={show} title={title} handleClose={handleClose}>
 				<AddAppointment setNewAppointmentData={setNewAppointmentData} selectedClientId={selectedClientId} />;
 			</Model>
+			<Model show={showModel} title="Show Appointement" handleClose={handleCloseAppointement}>
+				<GetAppointment selectedClientId={selectedClientId} selectedApointId={selectedApointId} />;
+			</Model>
 			<h3 className="custom-active font-weight-bold mb-0 pl-0">{title}</h3>
 			<div className={`col-md-12 d-flex overflow-auto p-0  ${row ? `flex-row` : `flex-wrap`}`}>
-				{getAllAppointement.map((appoint, index) => (
+				{getAllAppointement.map(appoint => (
 					<div
 						className="appointment-circle background-grey shadow border img-circle d-flex justify-content-center align-items-center m-2 background-active "
-						key={index}
+						key={appoint._id}
+						onClick={() => openModelAppointement(appoint._id)}
 					>
 						<span className="p-3 text-center text-light">
 							{`${new Date(appoint.date).getDate()}/${new Date(appoint.date).getMonth() + 1}/${new Date(

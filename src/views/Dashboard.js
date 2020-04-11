@@ -9,7 +9,7 @@ import { GlobalProvider } from '../context/GlobalState';
 const Dashboard = () => {
 	const [selectedClientId, setSelectedClientId] = useState('');
 
-	const handleClick = id => {
+	const handleClick = (id, color) => {
 		setSelectedClientId(id);
 	};
 
@@ -21,7 +21,12 @@ const Dashboard = () => {
 					<div className="col-sm-12 flex-wrap-xs p-0 d-flex justify-content-around">
 						<div className="col-md-7 col-xs-12 p-2 mr-2 shadow border-radius-custom">
 							<GlobalProvider>
-								<Clients row={true} title="Add Client" handleClick={handleClick} />
+								<Clients
+									row={true}
+									title="Add Client"
+									selectedClientId={selectedClientId}
+									handleClick={handleClick}
+								/>
 							</GlobalProvider>
 						</div>
 						<div className="col-md-5 col-xs-12 shadow border-radius-custom">

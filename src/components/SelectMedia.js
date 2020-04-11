@@ -1,10 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
-export default function SelectMedia({ type, setType, setFile, setOpen}) {
+export default function SelectMedia({ type, setType, setFile, setOpen }) {
 	const imageFile = useRef(null);
 	const videoFile = useRef(null);
-  
-  
 
 	const onFileChange = event => {
 		if (event.target.files && event.target.files[0]) {
@@ -15,6 +13,7 @@ export default function SelectMedia({ type, setType, setFile, setOpen}) {
 	};
 	const onImageClick = filetype => {
 		setType(filetype);
+
 		imageFile.current.click();
 	};
 	const onVideoClick = filetype => {

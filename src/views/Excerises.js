@@ -5,6 +5,7 @@ import api from '../apiCalls/api';
 
 const Client = props => {
 	let [exerciseData, setExerciseData] = useState('');
+
 	const handleExercise = id => {
 		api.getExerciseById(id).then(exercise => {
 			console.log(exercise.data);
@@ -23,20 +24,25 @@ const Client = props => {
 						row={true}
 						modelId="addExcersices"
 						handleExercise={handleExercise}
+						exerciseData={exerciseData}
 					/>
 				</ExerciseProvider>
 			</div>
 
 			<div className="col-sm-12 p-3 d-flex flex-wrap-xs ">
-				{file ? (
+				{String(file)
+					.split('.')
+					.pop() === 'mp4' ||
+				String(file)
+					.split('.')
+					.pop() === 'MP4' ? (
 					<div className="col-md-6 col-sm-12 text-center p-3 border-radius-custom shadow mr-2">
-						<video className="h-100 w-100" autoPlay controls>
-							<source key={_id} src={file} />
-						</video>
-						{/* <iframe src={exerciseData.file} className="h-100 w-100" /> */}
+						<video className="h-100 w-100" src={file} autoPlay controls></video>
 					</div>
 				) : (
-					''
+					<div className="col-md-6 col-sm-12 text-center p-3 border-radius-custom shadow mr-2">
+						<img src={file} />
+					</div>
 				)}
 
 				<div className="col-md-6 col-sm-12 p-3 border-radius-custom shadow">

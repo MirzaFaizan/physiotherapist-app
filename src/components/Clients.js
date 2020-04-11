@@ -3,14 +3,22 @@ import Model from './Model';
 import AddClient from './AddClient';
 import api from '../apiCalls/api';
 
-const Clients = ({ handleClick, title }) => {
+const Clients = ({ handleClick, title, selectedClientId }) => {
 	const [clientData, setClientData] = useState([]);
 	const [show, setShowModal] = useState(false);
+
 	const handleClose = () => {
 		setShowModal(false);
 	};
 	const openModal = () => {
 		setShowModal(true);
+	};
+	const deleteClient = id => {
+		api.deleteClient(id).then(result => {
+			let array = [...clientData];
+			let filteredData = array.filter(data => data._id !== id);
+			setClientData(filteredData);
+		});
 	};
 	useEffect(() => {
 		api.getAllClient().then(allClient => {
@@ -28,12 +36,18 @@ const Clients = ({ handleClick, title }) => {
 			<div className={`col-md-12 d-flex overflow-auto p-0  `}>
 				{clientData.map(client =>
 					client.file ? (
-						<div className="col-sm-3" key={client._id}>
-							<img
-								className="img-circle shadow client-image border-active filter"
-								src={client.file}
-								onClick={() => handleClick(client._id)}
-							/>
+						<div>
+							<div className="col-sm-3" key={client._id}>
+								<img
+									style={selectedClientId === client._id ? { border: '3px solid red' } : {}}
+									className="img-circle shadow client-image border-active filter"
+									src={client.file}
+									onClick={() => handleClick(client._id)}
+								/>
+							</div>
+							<button className="btn btn-primary ml-5 mt-2" onClick={() => deleteClient(client._id)}>
+								Delete
+							</button>
 						</div>
 					) : (
 						''

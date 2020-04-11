@@ -14,7 +14,7 @@ export default function AddAppointment({ selectedClientId, setNewAppointmentData
 		} else {
 			api.addAppointements(data, selectedClientId)
 				.then(result => {
-					if (result.status == 200) {
+					if (result.status === 200) {
 						setNewAppointmentData(result.data);
 						createNotification('success', result.data.Message);
 					} else {
@@ -34,7 +34,7 @@ export default function AddAppointment({ selectedClientId, setNewAppointmentData
 				<h3>Add Appointment</h3>
 				<div className="col-sm-12 d-flex">
 					<div className="col-sm-6">
-						<div className="d-flex">
+						<div className="">
 							Date
 							<div className="ml-3 w-100 border-bottom-custom">
 								<input
@@ -49,8 +49,8 @@ export default function AddAppointment({ selectedClientId, setNewAppointmentData
 						</div>
 					</div>
 					<div className="col-sm-6">
-						<div className="d-flex">
-							Time
+						<div className="">
+							Format(HH:MM) Time
 							<div className="ml-3 w-100 border-bottom-custom">
 								<input
 									type="text"
@@ -63,24 +63,19 @@ export default function AddAppointment({ selectedClientId, setNewAppointmentData
 						</div>
 					</div>
 				</div>
-				<div className="col-sm-12">
-					<div className="d-flex p-3">
-						Doctor
+				<div className="col-sm-6 mx-auto">
+					<div className=" p-3">
+						Notes
 						<div className="ml-3 w-100 border-bottom-custom">
-							<input
-								type="text"
-								className="border-0 w-100"
-								name="doctor"
-								ref={register({ required: true })}
-							/>
+							<textarea type="text" className="border-0 w-100 text-left" name="notes" ref={register} />
 						</div>
-						{errors.doctor && <span className="font-weight-bold text-danger">*</span>}
+						{errors.notes && <span className="font-weight-bold text-danger">*</span>}
 					</div>
 				</div>
 				<div className="col-sm-12">
 					<div className="d-flex " style={divStyle}>
 						UserId
-						<div className="ml-3 w-100 border-bottom-custom">
+                       <div className="ml-3 w-100 border-bottom-custom">
 							<input
 								type="text"
 								className="border-0 w-100"

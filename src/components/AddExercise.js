@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { ProgressBar } from 'react-bootstrap';
 import SelectMedia from './SelectMedia';
 import { useForm } from 'react-hook-form';
 import api from '../apiCalls/api';
@@ -9,11 +10,15 @@ export default function AddExercise({ setNewExerciseData }) {
 	const [file, setFile] = useState('');
 	const inputFile = useRef(null);
 	const { register, handleSubmit } = useForm();
-
-	//to get image
+	const intialState = {
+		percentage: 0
+	};
+	let [uploadPercentage, onUploadProgress] = useState(intialState);
+	
 
 	const onSubmit = data => {
 		let formdata = new FormData();
+
 		for (let key in data) {
 			if (data.hasOwnProperty(key)) {
 				formdata.append('' + key + '', data[key]);
@@ -21,11 +26,29 @@ export default function AddExercise({ setNewExerciseData }) {
 		}
 		formdata.append('file', file);
 		console.log(formdata.get('file'));
+		const options = {
+			onUploadProgress: ProgressEvent => {
+				const { loaded, total } = ProgressEvent;
+				let percent = Math.floor((loaded * 100) / total);
+				console.log(`${loaded}kb, of ${total} of ${percent}`);
+				if (percent < 100) {
+					onUploadProgress({ percentage: percent });
+				}
+			}
+		};
 
-		api.addExercise(formdata).then(result => {
+		api.addExercise(formdata, options).then(result => {
 			if (result.status === 200) {
-				setNewExerciseData(result.data);
-				createNotification('success', result.data.Message);
+				onUploadProgress({ percentage: 100 }, () => {
+					setTimeout(() => {
+						onUploadProgress({ percentage: 0 });
+					}, 1000);
+				});
+
+				setTimeout(() => {
+					setNewExerciseData(result.data);
+					createNotification('success', result.data.Message);
+				}, 1000);
 			}
 		});
 	};
@@ -36,13 +59,15 @@ export default function AddExercise({ setNewExerciseData }) {
 			<div className="col-sm-12 text-left d-flex">
 				<div className="col-sm-4 justify-content-center align-items-center d-flex flex-column position-relative">
 					{open && (
-						<SelectMedia
-							type={type}
-							setType={setType}
-							setFile={setFile}
-							setOpen={setOpen}
-							ref={inputFile}
-						/>
+						<div>
+							<SelectMedia
+								type={type}
+								setType={setType}
+								setFile={setFile}
+								setOpen={setOpen}
+								ref={inputFile}
+							/>
+						</div>
 					)}
 					<div
 						className="plus-circle img-circle background-active shadow client-image d-flex text-center justify-content-center align-items-center p-2 mr-2"
@@ -56,6 +81,15 @@ export default function AddExercise({ setNewExerciseData }) {
 						)}
 					</div>
 					<h4 className="py-2">Add Media</h4>
+					<p>
+						<ProgressBar
+							className="pl-5"
+							active
+							variant="success"
+							now={uploadPercentage.percentage}
+							label={`${uploadPercentage.percentage}%`}
+						/>
+					</p>
 				</div>
 				<div className="col-sm-8 justify-content-center d-flex flex-column">
 					<div className="d-flex">

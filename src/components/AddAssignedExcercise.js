@@ -11,7 +11,9 @@ export default function AddAssignedExcercises({ selectedClientId, setNewAssignDa
 	const [getAllExercise, setAllExercise] = useState([]);
 	const [busyDate, setBusyDate] = useState(false);
 	const [busyDay, setBusyDay] = useState([]);
-
+	const textAreaStyle = {
+		height: '156px'
+	};
 	const divStyle = {
 		opacity: '0'
 	};
@@ -36,8 +38,10 @@ export default function AddAssignedExcercises({ selectedClientId, setNewAssignDa
 		busyDay.map(result => {
 			console.log(moment(result.date).format('YYYY-MM-DD'));
 			console.log(event.target.value);
-			if (moment(result.date).format('YYYY-MM-DD') == event.target.value) {
+			if (moment(result.date).format('YYYY-MM-DD') === event.target.value) {
 				setBusyDate(true);
+			} else {
+				setBusyDate(false);
 			}
 		});
 	};
@@ -117,18 +121,24 @@ export default function AddAssignedExcercises({ selectedClientId, setNewAssignDa
 						data-date-format="YYYY MMMM DD"
 						name="endDate"
 						ref={register}
+						onChange={onChangeHandler}
 					/>
 				</div>
 				{errors.endDate && <span className="font-weight-bold text-danger">*</span>}
 			</div>
 			<div className="col-sm-6">
 				<div className="d-flex p-3">
-					<span className="col">Busy Period</span>
-					{console.log(busyDay)}
+					<span className="col ml-3">Busy Period</span>
+
 					<textarea
-						className="col-sm-7  py-1 rounded-pill"
+						className="col-12"
 						type="date"
-						value={busyDay.map(busy => busy.date).join('')}
+						style={textAreaStyle}
+						value={busyDay.map(busy => {
+							let newDate = new Date(busy.date);
+							let date = `${newDate.getFullYear()}/${newDate.getMonth() + 1}/${newDate.getDate()}  `;
+							return date;
+						})}
 						data-date-format="YYYY MMMM DD"
 						name="busyDate"
 						ref={register}

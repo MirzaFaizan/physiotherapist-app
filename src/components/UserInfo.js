@@ -12,7 +12,7 @@ export const UserInfo = ({ selectedClientId }) => {
 	}, [selectedClientId]);
 	console.log('selectedClient');
 	console.log(selectedClient);
-	let { passcode, name, lastname, age, weight, height, contactmethod } = selectedClient;
+	let { passcode, name, lastname, age, weight, height, contactmethod, phoneNumber, problem } = selectedClient;
 	return (
 		<div className="row px-4 py-5">
 			<div className="col-md-6 py-2">
@@ -34,7 +34,7 @@ export const UserInfo = ({ selectedClientId }) => {
 			<div className="col-md-12">
 				<div className="row">
 					<div className="col-md-6 py-2">
-						<span className="text-muted">Preferred Contact Method</span>
+						<span className="text-muted">Preferred Contact Method:-{phoneNumber}</span>
 					</div>
 					<div className="col-md-6 py-2">
 						<select className="custom-select">
@@ -46,6 +46,10 @@ export const UserInfo = ({ selectedClientId }) => {
 			<div className="col-md-6 py-2">
 				<span className="text-muted">Weight</span>
 				<span className="ml-2">{weight} lbs</span>
+			</div>
+			<div className="col-md-6 py-2">
+				<span className="text-muted">Problem Description</span>
+				<span className="ml-2">{problem} </span>
 			</div>
 			<div className="col-md-6 py-2">
 				<span className="text-muted">Client Id</span>

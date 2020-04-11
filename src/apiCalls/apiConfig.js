@@ -12,6 +12,8 @@ const config = {
 	getAllAsignExercise: '/getAllAssignExcercise',
 	getAllAsignExerciseById: '/getAllAssignExcercise/ID',
 	getExerciseById: '/getExercise',
-	getBusyDay:'/getBusyDay'
+	getBusyDay: '/getBusyDay',
+	deleteClient: '/client/delete',
+	editExercise: '/exercise/edit'
 };
 export default config;

@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { ProgressBar } from 'react-bootstrap';
 import { ToastContainer, createNotification } from '../components/Toast';
 import { useForm } from 'react-hook-form';
 import api from '../apiCalls/api';
@@ -8,7 +9,10 @@ export default function AddCLient() {
 	const [imageData, setImagedata] = useState('');
 	const { register, handleSubmit, errors } = useForm();
 	const [getAllExercise, setAllExercise] = useState([]);
-
+	const intialState = {
+		percentage: 0
+	};
+	let [uploadPercentage, onUploadProgress] = useState(intialState);
 	useEffect(() => {
 		api.getAllExercise().then(allExecersie => {
 			console.log(allExecersie);
@@ -17,6 +21,7 @@ export default function AddCLient() {
 	}, []);
 	const onSubmit = data => {
 		let formdata = new FormData();
+		console.log('hello');
 		for (let key in data) {
 			if (data.hasOwnProperty(key)) {
 				formdata.append('' + key + '', data[key]);
@@ -24,8 +29,23 @@ export default function AddCLient() {
 		}
 		console.log(imageData);
 		formdata.append('file', imageData);
+		const options = {
+			onUploadProgress: ProgressEvent => {
+				const { loaded, total } = ProgressEvent;
+				let percent = Math.floor((loaded * 100) / total);
+				console.log(`${loaded}kb, of ${total} of ${percent}`);
+				if (percent < 100) {
+					onUploadProgress({ percentage: percent });
+				}
+			}
+		};
 		api.addClient(formdata)
 			.then(result => {
+				onUploadProgress({ percentage: 100 }, () => {
+					setTimeout(() => {
+						onUploadProgress({ percentage: 0 });
+					}, 1000);
+				});
 				createNotification('success', result.data.Message);
 				setTimeout(() => {
 					window.location.reload('/');
@@ -82,7 +102,18 @@ export default function AddCLient() {
 							<i className="fas fa-plus text-grey font-36px text-light" />
 						)}
 					</div>
-					<h4 className="py-2">Add Media</h4>
+					<div>
+						<h4 className="py-2">Add Media</h4>
+						<p>
+							<ProgressBar
+								className="pl-5"
+								active
+								variant="success"
+								now={uploadPercentage.percentage}
+								label={`${uploadPercentage.percentage}%`}
+							/>
+						</p>
+					</div>
 				</div>
 				<div className="col-sm-8 justify-content-center d-flex flex-column">
 					<div className="d-flex mb-3">
@@ -117,7 +148,7 @@ export default function AddCLient() {
 								ref={register({ required: true, maxLength: 20 })}
 							/>
 						</div>
-						Height &nbsp; &nbsp; &nbsp;
+						Height
 						<div className="ml-3 w-25 border-bottom-custom">
 							<input
 								type="text"

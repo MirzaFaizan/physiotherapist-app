@@ -52,11 +52,11 @@ const addAppointements = async (data, id) => {
 	} catch (err) {}
 };
 
-const addExercise = async data => {
+const addExercise = async (data, option) => {
 	const url = apiConfig.addExercise;
 	console.log(data);
 	try {
-		const res = await axios.post(url, data);
+		const res = await axios.post(url, data, option);
 
 		return res;
 	} catch (err) {}
@@ -81,6 +81,15 @@ const getAllExercise = async () => {
 
 const getAllAppointement = async () => {
 	const url = apiConfig.getAllAppointments;
+	try {
+		const res = await axios.get(url);
+
+		return res;
+	} catch (err) {}
+};
+
+const getAppointementsById = async id => {
+	const url = `${apiConfig.getAllAppointments}/${id}`;
 	try {
 		const res = await axios.get(url);
 
@@ -116,6 +125,26 @@ const getExerciseById = async _id => {
 	} catch (err) {
 		throw err.response;
 	}
+};
+
+const editExercise = async (_id, description) => {
+	const data = {
+		description
+	};
+	try {
+		const res = await axios.put(`${apiConfig.editExercise}/${_id}`, data);
+		console.log(res);
+		return res;
+	} catch (err) {
+		throw err.response;
+	}
+};
+const deleteClient = async id => {
+	const url = `${apiConfig.deleteClient}/${id}`;
+	try {
+		const res = await axios.delete(url);
+		return res;
+	} catch (err) {}
 };
 
 const getAppointmentById = async userId => {
@@ -159,5 +188,8 @@ export default {
 	addAppointements,
 	getAppointmentById,
 	getAssignExerciseById,
-	getAllBusyDay
+	getAllBusyDay,
+	getAppointementsById,
+	deleteClient,
+	editExercise
 };
