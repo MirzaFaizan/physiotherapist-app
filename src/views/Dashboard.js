@@ -1,28 +1,77 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import Clients from '../components/Clients';
 import { UserInfo } from '../components/UserInfo';
 import { Progress } from '../components/Progress';
 import { Appointments } from '../components/Appointments';
-
+import api from '../apiCalls/api';
 import { AssignExercise } from '../components/AssignExercise';
+import { ToastContainer, createNotification } from '../components/Toast';
 const Dashboard = () => {
 	const [selectedClientId, setSelectedClientId] = useState('');
-
+	const [loading, setLoading] = useState(false);
+	const [clientData, setClientData] = useState([]);
+	const [deleteSelected, setDeleteSelected] = useState("")
 	const handleClick = (id, color) => {
 		setSelectedClientId(id);
 	};
 
 	const handleDeleteAppointment = (id) => {
-		alert(id)
+		// alert(id)
+		setLoading(true)
+		setDeleteSelected(id);
+		api.deleteAppointment(id)
+			.then(res => {
+				let changeId = selectedClientId
+				setSelectedClientId("");
+				setTimeout(() => {
+					setLoading(false)
+					createNotification("success", "Deleted Successfully")
+					setSelectedClientId(changeId)
+				}, 1000);
+
+			})
+			.catch(err => {
+				setLoading(false);
+				createNotification("error", "Error...!")
+				console.log(err)
+			})
 	}
 
 	const handleDeleteExcercise = (id) => {
-		alert(id)
+		setLoading(true)
+		setDeleteSelected(id);
+		api.deleteAssigExcercise(id)
+			.then(res => {
+				let changeId = selectedClientId
+				setSelectedClientId("");
+				setTimeout(() => {
+					setLoading(false)
+					createNotification("success", "Deleted Successfully")
+					setSelectedClientId(changeId)
+				}, 1000);
+
+				// console.log(res)
+			})
+			.catch(err => {
+				createNotification("error", "Error...!")
+
+				setLoading(false)
+				console.log(err)
+			})
 	}
+
+	useEffect(() => {
+		api.getAllClient().then(allClient => {
+			setClientData(allClient.data);
+			setSelectedClientId(allClient.data[0]._id)
+		});
+	}, []);
+
 
 	console.log(selectedClientId);
 	return (
 		<Fragment>
+			<ToastContainer />
 			<div className="container-fluid mt-3">
 				<div className="col-md-12">
 					<div className="col-sm-12 flex-wrap-xs p-0 d-flex justify-content-around">
@@ -33,6 +82,8 @@ const Dashboard = () => {
 								title="Add Client"
 								selectedClientId={selectedClientId}
 								handleClick={handleClick}
+								clientData={clientData}
+								setClientData={setClientData}
 							/>
 
 						</div>
@@ -56,6 +107,8 @@ const Dashboard = () => {
 										row={true}
 										modelId="appointmentModel"
 										handleDelete={handleDeleteAppointment}
+										loading={loading}
+										deleteSelected={deleteSelected}
 									/>
 								</div>
 
@@ -67,6 +120,8 @@ const Dashboard = () => {
 										row={true}
 										modelId="excerciseAssigned"
 										handleDelete={handleDeleteExcercise}
+										deleteSelected={deleteSelected}
+										loading={loading}
 									/>
 								</div>
 							</div>

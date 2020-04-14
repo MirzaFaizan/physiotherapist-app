@@ -48,7 +48,7 @@ export default function Login() {
 					type="email"
 					value={email}
 					onChange={e => setEmail(e.target.value)}
-					placeholder="Admin"
+					placeholder="User"
 					className="text-center border-0 border-bottom-custom"
 				/>
 				<input
@@ -66,8 +66,8 @@ export default function Login() {
 							<span class="sr-only">Loading...</span>
 						</div>
 					) : (
-						'Login'
-					)}
+							'Login'
+						)}
 				</button>
 			</div>
 		</div>

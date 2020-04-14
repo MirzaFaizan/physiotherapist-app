@@ -78,19 +78,19 @@ export const ExerciseList = ({ title, row = false, modelId = '', handleExercise,
 						</div>
 						{loading && selected === exercise._id ? (null) : (
 							<button
-								className="btn background-active text-white btn-sm mt-2"
+								className="btn btn-danger text-white btn-sm mt-2"
 								onClick={() => openEditExerciseModal(exercise._id)}
 							>
 								Edit
 							</button>
 						)}
 
-						< button
+						{/* < button
 							className="btn btn-danger btn-sm mt-2 ml-2"
 							onClick={() => deleteExcercise(exercise._id)}
 						>
 							{loading && selected === exercise._id ? 'Deleting' : 'Delete'}
-						</button>
+						</button> */}
 					</div>
 				))}
 

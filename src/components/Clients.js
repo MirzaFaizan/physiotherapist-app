@@ -3,8 +3,8 @@ import Model from './Model';
 import AddClient from './AddClient';
 import api from '../apiCalls/api';
 
-const Clients = ({ handleClick, title, selectedClientId }) => {
-	const [clientData, setClientData] = useState([]);
+const Clients = ({ handleClick, title, selectedClientId, clientData = [], setClientData }) => {
+	// const [clientData, setClientData] = useState([]);
 	const [show, setShowModal] = useState(false);
 
 	const handleClose = () => {
@@ -20,11 +20,7 @@ const Clients = ({ handleClick, title, selectedClientId }) => {
 			setClientData(filteredData);
 		});
 	};
-	useEffect(() => {
-		api.getAllClient().then(allClient => {
-			setClientData(allClient.data);
-		});
-	}, []);
+
 
 	return (
 		<Fragment>
