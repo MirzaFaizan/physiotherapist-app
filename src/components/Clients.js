@@ -38,12 +38,16 @@ const Clients = ({ handleClick, title, selectedClientId }) => {
 					client.file ? (
 						<div className="text-center">
 							<div className="col-sm-3" key={client._id}>
-								<img
+								<div className="img-circle shadow client-image border-active filter"
 									style={selectedClientId === client._id ? { border: '3px solid red' } : {}}
-									className="img-circle shadow client-image border-active filter"
-									src={client.file}
-									onClick={() => handleClick(client._id)}
-								/>
+								>
+									<img
+
+										className="w-100 h-100 img-circle"
+										src={client.file}
+										onClick={() => handleClick(client._id)}
+									/>
+								</div>
 							</div>
 							<button className="btn btn-danger btn-sm mt-2" onClick={() => deleteClient(client._id)}>
 								Delete

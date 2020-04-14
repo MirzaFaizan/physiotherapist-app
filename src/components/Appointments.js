@@ -7,7 +7,7 @@ import api from '../apiCalls/api';
 import AddAppointment from './AddAppointment';
 import GetAppointment from './GetAppointment';
 
-export const Appointments = ({ title, row = false, modelId = '', selectedClientId }) => {
+export const Appointments = ({ title, row = false, modelId = '', selectedClientId, handleDelete }) => {
 	const [getAllAppointement, setAllAppointement] = useState([]);
 	const [selectedApointId, setSelectedApointId] = useState('');
 	const [show, setShowModal] = useState(false);
@@ -63,7 +63,7 @@ export const Appointments = ({ title, row = false, modelId = '', selectedClientI
 							</span>
 						</div>
 
-						<input type="button" className="btn btn-danger btn-sm" value="delete" />
+						<input type="button" className="btn btn-danger btn-sm" value="delete" onClick={() => handleDelete(appoint._id)} />
 					</div>
 				))}
 

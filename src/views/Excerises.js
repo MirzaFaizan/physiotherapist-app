@@ -8,12 +8,12 @@ const Client = props => {
 
 	const handleExercise = id => {
 		api.getExerciseById(id).then(exercise => {
-			console.log(exercise.data);
 			setExerciseData(exercise.data);
 		});
 	};
 
 	const { _id, description, file } = exerciseData;
+	console.log("hi i am mark", exerciseData)
 
 	return (
 		<div className="fluid-container">
@@ -25,6 +25,7 @@ const Client = props => {
 						modelId="addExcersices"
 						handleExercise={handleExercise}
 						exerciseData={exerciseData}
+						setExerciseData={setExerciseData}
 					/>
 				</ExerciseProvider>
 			</div>
@@ -33,17 +34,17 @@ const Client = props => {
 				{String(file)
 					.split('.')
 					.pop() === 'mp4' ||
-				String(file)
-					.split('.')
-					.pop() === 'MP4' ? (
-					<div className="col-md-6 col-sm-12 text-center p-3 border-radius-custom shadow mr-2">
-						<video className="h-100 w-100" src={file} autoPlay controls></video>
-					</div>
-				) : (
-					<div className="col-md-6 col-sm-12 text-center p-3 border-radius-custom shadow mr-2">
-						<img src={file} />
-					</div>
-				)}
+					String(file)
+						.split('.')
+						.pop() === 'MP4' ? (
+						<div className="col-md-6 col-sm-12 text-center p-3 border-radius-custom shadow mr-2">
+							<video className="h-100 w-100" src={file} autoPlay controls></video>
+						</div>
+					) : (
+						<div className="col-md-6 col-sm-12 text-center p-3 border-radius-custom shadow mr-2">
+							<img src={file} />
+						</div>
+					)}
 
 				<div className="col-md-6 col-sm-12 p-3 border-radius-custom shadow">
 					<h3>Description</h3>

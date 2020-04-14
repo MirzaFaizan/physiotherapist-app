@@ -5,13 +5,20 @@ import { Progress } from '../components/Progress';
 import { Appointments } from '../components/Appointments';
 
 import { AssignExercise } from '../components/AssignExercise';
-import { GlobalProvider } from '../context/GlobalState';
 const Dashboard = () => {
 	const [selectedClientId, setSelectedClientId] = useState('');
 
 	const handleClick = (id, color) => {
 		setSelectedClientId(id);
 	};
+
+	const handleDeleteAppointment = (id) => {
+		alert(id)
+	}
+
+	const handleDeleteExcercise = (id) => {
+		alert(id)
+	}
 
 	console.log(selectedClientId);
 	return (
@@ -20,14 +27,14 @@ const Dashboard = () => {
 				<div className="col-md-12">
 					<div className="col-sm-12 flex-wrap-xs p-0 d-flex justify-content-around">
 						<div className="col-md-7 col-xs-12 p-2 mr-2 shadow border-radius-custom">
-							<GlobalProvider>
-								<Clients
-									row={true}
-									title="Add Client"
-									selectedClientId={selectedClientId}
-									handleClick={handleClick}
-								/>
-							</GlobalProvider>
+
+							<Clients
+								row={true}
+								title="Add Client"
+								selectedClientId={selectedClientId}
+								handleClick={handleClick}
+							/>
+
 						</div>
 						<div className="col-md-5 col-xs-12 shadow border-radius-custom">
 							<UserInfo selectedClientId={selectedClientId} />
@@ -48,6 +55,7 @@ const Dashboard = () => {
 										title="Appointments"
 										row={true}
 										modelId="appointmentModel"
+										handleDelete={handleDeleteAppointment}
 									/>
 								</div>
 
@@ -58,6 +66,7 @@ const Dashboard = () => {
 										title="Exercise Assigned"
 										row={true}
 										modelId="excerciseAssigned"
+										handleDelete={handleDeleteExcercise}
 									/>
 								</div>
 							</div>

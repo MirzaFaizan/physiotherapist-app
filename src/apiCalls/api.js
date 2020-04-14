@@ -39,7 +39,7 @@ const addClient = async data => {
 		const res = await axios.post(url, data);
 
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const addAppointements = async (data, id) => {
@@ -49,7 +49,7 @@ const addAppointements = async (data, id) => {
 		const res = await axios.post(url, data);
 
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const addExercise = async (data, option) => {
@@ -59,7 +59,7 @@ const addExercise = async (data, option) => {
 		const res = await axios.post(url, data, option);
 
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const getAllClient = async () => {
@@ -68,7 +68,7 @@ const getAllClient = async () => {
 		const res = await axios.get(url);
 
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 const getAllExercise = async () => {
 	const url = apiConfig.getAllExercise;
@@ -76,7 +76,7 @@ const getAllExercise = async () => {
 		const res = await axios.get(url);
 
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const getAllAppointement = async () => {
@@ -85,7 +85,7 @@ const getAllAppointement = async () => {
 		const res = await axios.get(url);
 
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const getAppointementsById = async id => {
@@ -94,7 +94,7 @@ const getAppointementsById = async id => {
 		const res = await axios.get(url);
 
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const getAllAssignExercise = async () => {
@@ -103,7 +103,7 @@ const getAllAssignExercise = async () => {
 		const res = await axios.get(url);
 
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const getAllBusyDay = async id => {
@@ -111,7 +111,7 @@ const getAllBusyDay = async id => {
 	try {
 		const res = await axios.get(url);
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const getExerciseById = async _id => {
@@ -144,7 +144,7 @@ const deleteClient = async id => {
 	try {
 		const res = await axios.delete(url);
 		return res;
-	} catch (err) {}
+	} catch (err) { }
 };
 
 const getAppointmentById = async userId => {
@@ -174,6 +174,38 @@ const getAssignExerciseById = async userId => {
 		throw err.response;
 	}
 };
+
+const deleteExcercise = async id => {
+
+	try {
+		const res = await axios.delete(`${apiConfig.deleteExcercise}/${id}`);
+
+		return res;
+	} catch (err) {
+		throw err.response;
+	}
+};
+const deleteAppointment = async id => {
+
+	try {
+		const res = await axios.delete(`${apiConfig.getAllAppointments}/${id}`);
+
+		return res;
+	} catch (err) {
+		throw err.response;
+	}
+};
+const deleteAssigExcercise = async id => {
+
+	try {
+		const res = await axios.delete(`${apiConfig.getAllAsignExercise}/${id}`);
+
+		return res;
+	} catch (err) {
+		throw err.response;
+	}
+};
+
 export default {
 	signIn,
 	assignExercise,
@@ -191,5 +223,8 @@ export default {
 	getAllBusyDay,
 	getAppointementsById,
 	deleteClient,
-	editExercise
+	editExercise,
+	deleteExcercise,
+	deleteAppointment,
+	deleteAssigExcercise
 };

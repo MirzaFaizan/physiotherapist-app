@@ -4,7 +4,7 @@ import AddAssignedExcercise from './AddAssignedExcercise';
 import Model from './Model';
 import api from '../apiCalls/api';
 
-export const AssignExercise = ({ title, row = false, modelId = '', selectedClientId }) => {
+export const AssignExercise = ({ title, row = false, modelId = '', selectedClientId, handleDelete }) => {
 	const [getAllAssignExercise, setAllAssignExercise] = useState([]);
 	const [show, setShowModal] = useState(false);
 
@@ -40,7 +40,7 @@ export const AssignExercise = ({ title, row = false, modelId = '', selectedClien
 						>
 							<span className="p-3 text-center text-light">{result.exercise}</span>
 						</div>
-						<button className="btn btn-danger btn-sm">Delete</button>
+						<button className="btn btn-danger btn-sm" onClick={() => handleDelete(result._id)}>Delete</button>
 					</div>
 				))}
 

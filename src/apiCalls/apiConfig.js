@@ -14,6 +14,7 @@ const config = {
 	getExerciseById: '/getExercise',
 	getBusyDay: '/getBusyDay',
 	deleteClient: '/client/delete',
-	editExercise: '/exercise/edit'
+	editExercise: '/exercise/edit',
+	deleteExcercise: '/getExercise',
 };
 export default config;

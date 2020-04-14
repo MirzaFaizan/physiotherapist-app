@@ -1,17 +1,17 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import AddAssignedExcercise from './AddAssignedExcercise';
+
 import AddExcercise from './AddExercise';
 import EditExerciseDescription from './EditExerciseDescription';
 import Model from './Model';
 import api from '../apiCalls/api';
-
-import AddAppointment from './AddAppointment';
-export const ExerciseList = ({ title, row = false, modelId = '', handleExercise, exerciseData }) => {
+import { ToastContainer, createNotification } from '../components/Toast';
+export const ExerciseList = ({ title, row = false, modelId = '', handleExercise, exerciseData, setExerciseData }) => {
 	const [getAllExercise, setAllExercise] = useState([]);
 	const [show, setShowModal] = useState(false);
 	const [showExercise, setShowExerciseModal] = useState(false);
 	const [selectedEditExercise, selectedEditExerciseModal] = useState(false);
-
+	const [loading, setLoading] = useState(false);
+	const [selected, setSelected] = useState('')
 	const handleClose = () => {
 		setShowModal(false);
 	};
@@ -34,12 +34,29 @@ export const ExerciseList = ({ title, row = false, modelId = '', handleExercise,
 
 	const setNewExerciseData = response => {
 		setAllExercise([...getAllExercise, response.SavedExercise]);
-
 		handleClose();
 	};
 
+	const deleteExcercise = (id) => {
+		setLoading(true)
+		setSelected(id);
+		api.deleteExcercise(id)
+			.then(res => {
+				console.log(res);
+				createNotification('success', "Excercise Deleted Successfully");
+			})
+			.catch(err => {
+				console.log(err)
+				createNotification('error', "Error while Deleting");
+				setLoading(false);
+			})
+	}
+
+
+
 	return (
 		<Fragment>
+			<ToastContainer />
 			<Model show={show} title={title} handleClose={handleClose}>
 				<AddExcercise setNewExerciseData={setNewExerciseData} />
 			</Model>
@@ -50,7 +67,7 @@ export const ExerciseList = ({ title, row = false, modelId = '', handleExercise,
 
 			<div className={`col-md-12 d-flex overflow-auto p-0  ${row ? `flex-row` : `flex-wrap`}`}>
 				{getAllExercise.map((exercise, index) => (
-					<div>
+					<div className="text-center mr-4">
 						<div
 							className="appointment-circle background-grey shadow  img-circle d-flex justify-content-center align-items-center m-2 background-active "
 							style={exerciseData._id === exercise._id ? { border: '3px solid yellow' } : {}}
@@ -59,11 +76,20 @@ export const ExerciseList = ({ title, row = false, modelId = '', handleExercise,
 						>
 							<span className="p-3 text-center text-light">{exercise.name}</span>
 						</div>
-						<button
-							className="btn btn-primary ml-4 mt-2"
-							onClick={() => openEditExerciseModal(exercise._id)}
+						{loading && selected === exercise._id ? (null) : (
+							<button
+								className="btn background-active text-white btn-sm mt-2"
+								onClick={() => openEditExerciseModal(exercise._id)}
+							>
+								Edit
+							</button>
+						)}
+
+						< button
+							className="btn btn-danger btn-sm mt-2 ml-2"
+							onClick={() => deleteExcercise(exercise._id)}
 						>
-							Edit description
+							{loading && selected === exercise._id ? 'Deleting' : 'Delete'}
 						</button>
 					</div>
 				))}
@@ -76,6 +102,6 @@ export const ExerciseList = ({ title, row = false, modelId = '', handleExercise,
 					<i className="fas fa-plus text-muted font-36px " />
 				</div>
 			</div>
-		</Fragment>
+		</Fragment >
 	);
 };
