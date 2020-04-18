@@ -157,7 +157,7 @@ export default function AddCLient() {
 								ref={register({ required: true, maxLength: 20 })}
 							/>
 						</div>
-						Height
+						Height(CM)
 						<div className="ml-3 w-25 border-bottom-custom">
 							<input
 								type="text"
@@ -193,7 +193,7 @@ export default function AddCLient() {
 						</div>
 					</div>
 					<div className="d-flex mb-3">
-						Weight
+						Weight(KG)
 						<div className="mx-3 w-25 border-bottom-custom">
 							<input
 								type="text"

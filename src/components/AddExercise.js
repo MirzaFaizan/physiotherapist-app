@@ -25,12 +25,12 @@ export default function AddExercise({ setNewExerciseData }) {
 			}
 		}
 		formdata.append('file', file);
-		console.log(formdata.get('file'));
+
 		const options = {
 			onUploadProgress: ProgressEvent => {
 				const { loaded, total } = ProgressEvent;
 				let percent = Math.floor((loaded * 100) / total);
-				console.log(`${loaded}kb, of ${total} of ${percent}`);
+				// console.log(`${loaded}kb, of ${total} of ${percent}`);
 				if (percent < 100) {
 					onUploadProgress({ percentage: percent });
 				}
@@ -38,6 +38,8 @@ export default function AddExercise({ setNewExerciseData }) {
 		};
 
 		api.addExercise(formdata, options).then(result => {
+			debugger;
+			console.log(result)
 			if (result.status === 200) {
 				onUploadProgress({ percentage: 100 }, () => {
 					setTimeout(() => {

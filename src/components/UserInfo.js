@@ -29,7 +29,7 @@ export const UserInfo = ({ selectedClientId }) => {
 			</div>
 			<div className="col-md-6 py-2">
 				<span className="text-muted">Height</span>
-				<span className="ml-2">{height} Feet</span>
+				<span className="ml-2">{height} CM</span>
 			</div>
 			<div className="col-md-12">
 				<div className="row">
@@ -43,7 +43,7 @@ export const UserInfo = ({ selectedClientId }) => {
 			</div>
 			<div className="col-md-6 py-2">
 				<span className="text-muted">Weight</span>
-				<span className="ml-2">{weight} lbs</span>
+				<span className="ml-2">{weight} KG</span>
 			</div>
 			<div className="col-md-6 py-2">
 				<span className="text-muted">Notes</span>
