@@ -117,7 +117,10 @@ export default function AddCLient() {
 				</div>
 				<div className="col-sm-8 justify-content-center d-flex flex-column">
 					<div className="d-flex mb-3">
-						{errors.name && <span className="font-weight-bold text-danger">*</span>}
+						{errors.name && <><span className="font-weight-bold text-danger">*</span>
+							{createNotification('warning', 'Name is required')}
+						</>
+						}
 						Name
 						<div className="mx-3 w-25 border-bottom-custom">
 							<input
@@ -127,7 +130,10 @@ export default function AddCLient() {
 								ref={register({ required: true, maxLength: 20 })}
 							/>
 						</div>
-						{errors.lastname && <span className="font-weight-bold text-danger">*</span>}
+						{errors.lastname && <><span className="font-weight-bold text-danger">*</span>
+							{createNotification('warning', 'Last Name is required')}
+						</>
+						}
 						Last Name
 						<div className="ml-3 w-25 border-bottom-custom">
 							<input
@@ -139,7 +145,10 @@ export default function AddCLient() {
 						</div>
 					</div>
 					<div className="d-flex mb-3">
-						{errors.age && <span className="font-weight-bold text-danger">*</span>} Age &nbsp; &nbsp;
+						{errors.age && <> <span className="font-weight-bold text-danger">*</span>
+							{createNotification('warning', 'Age is required')}
+						</>
+						} Age &nbsp; &nbsp;
 						<div className="mx-3 w-25 border-bottom-custom">
 							<input
 								type="text"
@@ -159,7 +168,10 @@ export default function AddCLient() {
 						</div>
 					</div>
 					<div className="d-flex mb-3">
-						{errors.number && <span className="font-weight-bold text-danger">*</span>} Number
+						{errors.number && <><span className="font-weight-bold text-danger">*</span>
+							{createNotification('warning', 'Phone number is required')}
+						</>
+						} Number
 						<div className="mx-3 w-68 border-bottom-custom">
 							<input
 								type="number"
@@ -221,7 +233,7 @@ export default function AddCLient() {
 							<select
 								className="custom-select"
 								name="excercise"
-								ref={register({ required: true, maxLength: 20 })}
+							// ref={register({ required: true, maxLength: 20 })}
 							>
 								{selectOption}
 							</select>

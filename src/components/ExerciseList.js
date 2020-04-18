@@ -21,8 +21,8 @@ export const ExerciseList = ({ title, row = false, modelId = '', handleExercise,
 	const editExerciseModalClose = () => {
 		setShowExerciseModal(false);
 	};
-	const openEditExerciseModal = id => {
-		selectedEditExerciseModal(id);
+	const openEditExerciseModal = value => {
+		selectedEditExerciseModal(value);
 		setShowExerciseModal(true);
 	};
 	useEffect(() => {
@@ -42,7 +42,9 @@ export const ExerciseList = ({ title, row = false, modelId = '', handleExercise,
 		setSelected(id);
 		api.deleteExcercise(id)
 			.then(res => {
-				console.log(res);
+				api.getAllExercise().then(allExecersie => {
+					setAllExercise(allExecersie.data);
+				});
 				createNotification('success', "Excercise Deleted Successfully");
 			})
 			.catch(err => {
@@ -79,18 +81,18 @@ export const ExerciseList = ({ title, row = false, modelId = '', handleExercise,
 						{loading && selected === exercise._id ? (null) : (
 							<button
 								className="btn btn-danger text-white btn-sm mt-2"
-								onClick={() => openEditExerciseModal(exercise._id)}
+								onClick={() => openEditExerciseModal(exercise)}
 							>
 								Edit
 							</button>
 						)}
 
-						{/* < button
+						< button
 							className="btn btn-danger btn-sm mt-2 ml-2"
 							onClick={() => deleteExcercise(exercise._id)}
 						>
 							{loading && selected === exercise._id ? 'Deleting' : 'Delete'}
-						</button> */}
+						</button>
 					</div>
 				))}
 

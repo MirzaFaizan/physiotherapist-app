@@ -13,7 +13,7 @@ const Client = props => {
 	};
 
 	const { _id, description, file } = exerciseData;
-	console.log("hi i am mark", exerciseData)
+
 
 	return (
 		<div className="fluid-container">

@@ -4,10 +4,10 @@ import { ToastContainer, createNotification } from '../components/Toast';
 import api from '../apiCalls/api';
 export default function EditExercise({ selectedEditExercise }) {
 	console.log(selectedEditExercise);
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, errors } = useForm();
 
 	const onSubmit = data => {
-		api.editExercise(selectedEditExercise, data.description).then(result => {
+		api.editExercise(selectedEditExercise._id, data.description).then(result => {
 			if (result.status == 200) {
 				createNotification('success', result.data.message);
 			} else {
@@ -20,10 +20,11 @@ export default function EditExercise({ selectedEditExercise }) {
 		<Fragment>
 			<ToastContainer />
 			<form className="col-sm-12 text-center">
-				<h3>Edit Exercise</h3>
+				<h3>{selectedEditExercise.name}</h3>
 
 				<div className="d-flex">
 					<h4>Description</h4>
+					{errors.description && createNotification('warning', 'Description is required')}
 					<div className="ml-3 mt-2 w-75 h-100">
 						<textarea className="w-100 h-100 p-0" name="description" ref={register({ required: true })} />
 					</div>

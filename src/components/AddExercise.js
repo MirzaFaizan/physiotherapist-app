@@ -14,7 +14,7 @@ export default function AddExercise({ setNewExerciseData }) {
 		percentage: 0
 	};
 	let [uploadPercentage, onUploadProgress] = useState(intialState);
-	
+
 
 	const onSubmit = data => {
 		let formdata = new FormData();
@@ -50,7 +50,10 @@ export default function AddExercise({ setNewExerciseData }) {
 					createNotification('success', result.data.Message);
 				}, 1000);
 			}
-		});
+		})
+			.catch(err => {
+				console.log(err)
+			})
 	};
 	return (
 		<div className="col-sm-12 text-center">
@@ -77,8 +80,8 @@ export default function AddExercise({ setNewExerciseData }) {
 						{file === '' ? (
 							<i className="fas fa-plus text-grey font-36px text-light" />
 						) : (
-							<i className="far fa-check-circle text-grey font-36px text-light" />
-						)}
+								<i className="far fa-check-circle text-grey font-36px text-light" />
+							)}
 					</div>
 					<h4 className="py-2">Add Media</h4>
 					<p>

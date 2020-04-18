@@ -46,7 +46,7 @@ export const UserInfo = ({ selectedClientId }) => {
 				<span className="ml-2">{weight} lbs</span>
 			</div>
 			<div className="col-md-6 py-2">
-				<span className="text-muted">Problem Description</span>
+				<span className="text-muted">Notes</span>
 				<span className="ml-2">{problem} </span>
 			</div>
 			<div className="col-md-6 py-2">
