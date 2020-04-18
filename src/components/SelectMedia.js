@@ -21,8 +21,8 @@ export default function SelectMedia({ type, setType, setFile, setOpen }) {
 		videoFile.current.click();
 	};
 	return (
-		<div className="m-2 custom-media-select text-custom-blue border border-radius shadow position-absolute bg-white">
-			<input
+		<div className="m-2 custom-media-select text-custom-blue border border-radius shadow position-absolute bg-white" style={{ width: '160px' }}>
+			{/* <input
 				type="file"
 				id="image"
 				accept="image/x-png,image/gif,image/jpeg"
@@ -33,7 +33,7 @@ export default function SelectMedia({ type, setType, setFile, setOpen }) {
 			/>
 			<div className="p-2 font-weight-bold" type="button" onClick={() => onImageClick('image')}>
 				<i class="fas fa-images mx-2" /> Upload Picture
-			</div>
+			</div> */}
 			<input
 				type="file"
 				id="video"
@@ -43,7 +43,7 @@ export default function SelectMedia({ type, setType, setFile, setOpen }) {
 				onChange={onFileChange}
 				name="video"
 			/>
-			<div className="p-2 font-weight-bold" type="button" onClick={() => onVideoClick('video')}>
+			<div className="p-2 font-weight-bold w-100" type="button" onClick={() => onVideoClick('video')}>
 				<i className="fas fa-video mx-2" /> Upload Video
 			</div>
 		</div>
