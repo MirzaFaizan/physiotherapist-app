@@ -108,6 +108,7 @@ export default function AddExercise({ setNewExerciseData }) {
 							/>
 						</div>
 					</div>
+
 					<div className="d-flex flex-column py-3">
 						Description
 						<div className="border-active mt-2 w-75 h-100">
