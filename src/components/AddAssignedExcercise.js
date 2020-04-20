@@ -149,10 +149,10 @@ export default function AddAssignedExcercises({ selectedClientId, setNewAssignDa
 				<div className="d-flex p-3">
 					Reps
 					<div className="ml-3 w-100 border-bottom-custom">
-						<input type="text" className="border-0 w-100" name="rips" ref={register({ required: false })} />
+						<input type="text" className="border-0 w-100" name="reps" ref={register({ required: false })} />
 					</div>
 				</div>
-				{errors.rips && <span className="font-weight-bold text-danger">*</span>}
+				{errors.reps && <span className="font-weight-bold text-danger">*</span>}
 			</div>
 
 			<div className="col-sm-12">
